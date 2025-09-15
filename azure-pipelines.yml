@@ -1,0 +1,25 @@
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureServiceConnectionId: '<GUID>'
+
+  vmImageName: 'ubuntu-latest'
+
+  projectRoot: $(System.DefaultWorkingDirectory)
+
+stages:
+
+- stage: Build and Deploy
+  displayName: Build and deploy
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: AzureContainerApps@1
+      inputs:
+        appSourcePath: '$(Build.SourcesDirectory)/src'
+        azureSubscription: 'my-subscription-service-connection'
+        acrName: 'containerdemoappacr'
+        containerAppName: 'containerdemoapp-app'
+        resourceGroup: 'containerdemoapp-rg'
