@@ -8,7 +8,7 @@ variables:
 
 stages:
 
-- stage: Build and Deploy
+- stage: BuildAndDeploy
   displayName: Build and deploy
   jobs:
   - job: BuildJob
@@ -19,7 +19,7 @@ stages:
     - task: AzureContainerApps@1
       inputs:
         appSourcePath: '$(Build.SourcesDirectory)/src'
-        azureSubscription: 'my-subscription-service-connection'
+        azureSubscription: 'container-demo-connection'
         acrName: 'containerdemoappacr'
         containerAppName: 'containerdemoapp-app'
         resourceGroup: 'containerdemoapp-rg'
