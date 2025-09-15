@@ -1,3 +1,3 @@
-# output "azure_dns" {
-#   value = resource.azurerm_container_app.
-# }
+output "azure_url" {
+  value = azurerm_container_app.containerapp.ingress[0].fqdn
+}
